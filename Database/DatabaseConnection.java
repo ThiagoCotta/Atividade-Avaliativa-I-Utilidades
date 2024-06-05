@@ -12,9 +12,21 @@ public class DatabaseConnection {
             try {
                 connection = DriverManager.getConnection("jdbc:sqlserver://DESKTOP-MGQG2VE;database=db_lojatenis;", "sa", "loja1");
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Erro ao conectar com o banco de dados: " + e.getMessage());
             }
         }
         return connection;
+    }
+
+    public static void closeConnection() {
+        if (connection != null) {
+            try {
+                System.out.println("Fechando a conexão com o banco de dados...");
+                connection.close();
+                connection = null;
+            } catch (SQLException e) {
+                System.out.println("Erro ao fechar a conexão com o banco de dados: " + e.getMessage());
+            }
+        }
     }
 }
